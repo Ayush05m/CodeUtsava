@@ -5,17 +5,17 @@ import "./App.css";
 import { ActionForm } from "./components/Form";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   return (
     <>
-      <Navbar />
-      <div className="Hero flex w-[50%]" >
-      <ActionForm/>
-
+      <div className="App">
+        <Navbar />
+        <div className="Hero flex justify-center">
+          <ActionForm />
+        </div>
       </div>
     </>
-    
   );
 }
 
