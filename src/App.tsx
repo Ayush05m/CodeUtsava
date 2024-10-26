@@ -2,10 +2,12 @@
 import { Navbar } from "./components/Navbar";
 
 import "./App.css";
+import { Buttons } from "./components/Actionbtn"
 import { ActionForm } from "./components/Form";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { RootState } from "./store/store";
+import Actions from "./components/actions";
 
 function App() {
   const user: string = useSelector((state: RootState) => state.user);
@@ -28,7 +30,9 @@ function App() {
             <ActionForm />
           </div>
         </div>
-        <div className="try">{user && <h1>{user}</h1>}</div>
+        <div className="actions flex justify-center ">
+          <Actions />
+        </div>
       </div>
     </>
   );
