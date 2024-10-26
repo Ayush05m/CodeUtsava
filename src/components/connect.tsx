@@ -27,11 +27,6 @@ const Connect: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(userAddress);
-  });
-  console.log(useSelector((state) => state));
-
   return (
     <div className="connect ">
       {!userAddress && <button onClick={connect}>Connect</button>}

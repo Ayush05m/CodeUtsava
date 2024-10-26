@@ -7,8 +7,6 @@ import { Provider } from 'react-redux'
 import { MetaMaskProvider } from "@metamask/sdk-react";
 const REACT_APP_INFURA_API_KEY = import.meta.env.REACT_APP_INFURA_API_KEY;
 
-console.log(REACT_APP_INFURA_API_KEY);
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <MetaMaskProvider
