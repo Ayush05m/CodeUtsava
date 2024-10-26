@@ -24,21 +24,21 @@ export function Navbar() {
                 {/* <NavigationMenuTrigger>Getting started</NavigationMenuTrigger> */}
                 <a href="/docs">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Getting Started
+                    Home
                   </NavigationMenuLink>
                 </a>{" "}
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <a href="/docs">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Actions
+                    Access Security
                   </NavigationMenuLink>
                 </a>{" "}
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <a href="/docs">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Documentation
+                    Create Personal Security
                   </NavigationMenuLink>
                 </a>
               </NavigationMenuItem>
