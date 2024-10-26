@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Navbar } from "./components/NavBar";
+import { Navbar } from "./components/Navbar";
+
 import "./App.css";
+import { ActionForm } from "./components/Form";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -8,7 +10,12 @@ function App() {
   return (
     <>
       <Navbar />
+      <div className="Hero flex w-[50%]" >
+      <ActionForm/>
+
+      </div>
     </>
+    
   );
 }
 
