@@ -13,14 +13,14 @@ import {
   FormMessage,
 } from "../components/ui/form"
 import { Input } from "../components/ui/input"
-
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  ethereum: z.string().email("Invalid ethereum address"),
-  password: z.string().email("Invalid password"),
-})
+import formSchema  from "../schemas/formSchema"
+// const formSchema = z.object({
+//   username: z.string().min(2, {
+//     message: "Username must be at least 2 characters.",
+//   }),
+//   ethereum: z.string().email("Invalid ethereum address"),
+//   password: z.string().email("Invalid password"),
+// })
 
 export function ActionForm() {
   // ...// 1. Define your form.
@@ -79,6 +79,24 @@ export function ActionForm() {
               <FormMessage />
             </FormItem>
           )}
+        />
+        <FormField
+  control={form.control}
+  name="dropdownField"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Choose an Option</FormLabel>
+        <FormControl>
+        <select {...field}>
+            <option value="">Select an option</option>
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+        </select>
+        </FormControl>
+        <FormMessage />
+        </FormItem>
+        )}
         />
         <Button type="submit">Submit</Button>
       </form>
