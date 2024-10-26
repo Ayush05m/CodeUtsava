@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSDK } from "@metamask/sdk-react";
 import { cn } from "../lib/utils";
 import { UseSelector, useDispatch } from "react-redux";
+import "../styles/navbar.css";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,6 +15,7 @@ import {
 import Connect from "./connect";
 
 export function Navbar() {
+  const handleLogin = () => {};
   return (
     <>
       <div className="flex border border-gray-600 justify-between px-5 py-2">
@@ -22,21 +24,21 @@ export function Navbar() {
             <NavigationMenuList>
               <NavigationMenuItem>
                 {/* <NavigationMenuTrigger>Getting started</NavigationMenuTrigger> */}
-                <a href="/docs">
+                <a href="/">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Home
                   </NavigationMenuLink>
                 </a>{" "}
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <a href="/docs">
+                <a href="/access-existing-security">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Access Security
                   </NavigationMenuLink>
                 </a>{" "}
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <a href="/docs">
+                <a href="/create-personal-security">
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Create Personal Security
                   </NavigationMenuLink>
@@ -45,8 +47,28 @@ export function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
-        <div className="nav-end">
-          <Connect />
+        <div className="nav-end flex gap-5">
+          {/* <Connect /> */}
+          <div className="Login">
+            {/* <input type="checkbox" name="" id="" /> */}
+            <a href="/login" className="loginLabel">
+              <button className="btn-31" onClick={handleLogin}>
+                <span className="text-container">
+                  <span className="loginTxt">Login</span>
+                </span>
+              </button>
+            </a>
+          </div>
+          <div className="SignUp">
+            {/* <input type="checkbox" name="" id="" /> */}
+            <a href="/signup" className="loginLabel">
+              <button className="btn-31" onClick={handleLogin}>
+                <span className="text-container">
+                  <span className="loginTxt">Sign Up</span>
+                </span>
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </>
@@ -78,41 +100,4 @@ const ListItem = React.forwardRef<
   );
 });
 
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
 ListItem.displayName = "ListItem";

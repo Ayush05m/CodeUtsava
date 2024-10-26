@@ -1,7 +1,8 @@
+import Actions from "../components/actions";
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
 // import { useEffect, useState } from "react";
-import { ActionForm } from "../components/Form";
+// import { ActionForm } from "../components/Form";
 
 export const Home = () => {
   const user: string = useSelector((state: RootState) => state.user);
@@ -14,8 +15,10 @@ export const Home = () => {
             Security System
           </h1>
         )}
-        <div className="form flex justify-center  ">
-          <ActionForm />
+        <div className="form flex justify-center  ">{/* <ActionForm /> */}</div>
+
+        <div className="actions">
+          <Actions />
         </div>
       </div>
     </>

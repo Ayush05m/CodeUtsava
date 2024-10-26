@@ -1,38 +1,35 @@
 // import { useState } from "react";
 import { Navbar } from "./components/Navbar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
-import { Buttons } from "./components/Actionbtn"
-import { ActionForm } from "./components/Form";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { RootState } from "./store/store";
-import Actions from "./components/actions";
+import Login from "./page/Login";
+import SignUp from "./page/signup";
+import { Home } from "./page/Home";
 
 function App() {
-  const user: string = useSelector((state: RootState) => state.user);
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  // const user: string = useSelector((state: RootState) => state.user);
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
+  const user = localStorage.getItem("userAddress");
+  // console.log(user);
 
   return (
     <>
       <div className="App">
-        <Navbar />
-        <div className="Hero ">
-          {!user && (
-            <h1 className="text-center">
-              Connect to the Metamask and register yourself to use the Home
-              Security System
-            </h1>
-          )}
-          <div className="form flex justify-center  ">
-            <ActionForm />
-          </div>
-        </div>
-        <div className="actions flex justify-center ">
-          <Actions />
-        </div>
+        <Router>
+          <Navbar />
+          <main className="pt-0">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              {/* <Route path="/about" element={< />} /> */}
+              // <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </main>
+          {/* <Footer /> */}
+        </Router>
       </div>
     </>
   );

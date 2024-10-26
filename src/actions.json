@@ -1,4 +1,14 @@
 {
-    "open" : {},
-    "close" : {}
+    "Adduser" : {
+        "link": "/addUser"
+    },
+    "Removeuser" : {
+        "link": "/revokeUserAccess"
+    },
+    "GetLogs" : {
+        "link":"/getLogs"
+    },
+    "ListUSerAccess" : {
+        "link":"/checkUserAccess"
+    }
 }

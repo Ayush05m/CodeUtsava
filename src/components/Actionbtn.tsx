@@ -1,14 +1,26 @@
 import React from "react";
 import "./buttonstyle.css";
+import { AddUser } from "../api/actions.ts";
 
-export const Buttons = (data:any) => {
-  // const text = data[0];
-  console.log(data.text);
-  
+export const Buttons = (data: any) => {
+  // console.log(data)
+  // console.log(data.text);
+  const userAddress = localStorage.getItem("userAddress");
+  console.log(userAddress);
+
   return (
     /* From Uiverse.io by kamehame-ha */
     <div className="actionbtn p-2">
-      <button className="">
+      <button
+        className=""
+        onClick={async () => {
+          const response = await AddUser({
+            username: "username",
+            userAddress: "0xa184a1ad3757215b5da2f8fb3f138f9e1fb23012",
+          });
+          console.log(response);
+        }}
+      >
         <svg
           width="25"
           height="25"
