@@ -16,7 +16,7 @@ import Connect from "./connect";
 export function Navbar() {
   return (
     <>
-      <div className="flex border border-gray-600 justify-between">
+      <div className="flex border border-gray-600 justify-between px-5 py-2">
         <div className="nav-start">
           <NavigationMenu>
             <NavigationMenuList>

@@ -1,14 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import { string } from "zod";
+interface UserState {
+  user: string;
+}
 
+const initialState: UserState = {
+  user: "",
+};
 export const userSlice = createSlice({
   name: "User",
-  initialState: {
-    user: "",
-  },
+  initialState: initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload.userId;
+      state.user = action.payload;
     },
     removeUser: (state) => {
       state.user = "";
