@@ -16,6 +16,7 @@ const Connect: React.FC = () => {
     try {
       const accounts = await sdk?.connect();
       setUserAddress(accounts?.[0]);
+      console.log(connected, connecting, provider, chainId);
     } catch (err) {
       console.warn("failed to connect..", err);
     }
@@ -32,6 +33,10 @@ const Connect: React.FC = () => {
   dispatch(setUser(userAddress));
   // console.log(useSelector(state => state));
 
+  // const handleProfileClick = () => [
+  //   const
+  // ]
+
   return (
     <div className="navConnect flex justify-center h-[100%]">
       <div className="connect h-[100%]">
@@ -40,11 +45,26 @@ const Connect: React.FC = () => {
       <div className="logout flex flex-col items-end">
         {userAddress ? (
           <>
-            <button onClick={logout}>Logout</button>
-            <span className="">
-              {" "}
-              Conneted with {userAddress.slice(0, 15) + "..."}
-            </span>
+            <div className="profile">
+              {/* <input
+                type="checkbox"
+                className="absolute profile-input"
+                style={{ width: "40px", height: "40px" }}
+              /> */}
+              <img
+                src="/profile-icon.jpg"
+                className="profile-icon flex rounded-full cursor-pointer"
+                style={{ width: "40px", height: "40px" }}
+                alt=""
+              />
+              <div className="profile-expansion flex-col absolute right-4 bg-black">
+                <button onClick={logout}>Logout</button>
+                <span className="">
+                  {" "}
+                  Conneted with {userAddress.slice(0, 15) + "..."}
+                </span>
+              </div>
+            </div>
           </>
         ) : (
           // <p>Connected as: {userAddress}</p>

@@ -162,3 +162,7 @@ button:hover::after {
 .connect button:hover {
     box-shadow: inset 0px 0px 25px #1479EA;
 }
+
+.profile input[type="checkbox"]:checked>.profile-expansion {
+    display: flex;
+}
