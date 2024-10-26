@@ -11,6 +11,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+<<<<<<< HEAD
 } from "../components/ui/form";
 import { Input } from "../components/ui/input";
 
@@ -21,6 +22,18 @@ const formSchema = z.object({
   ethereum: z.string().email("Invalid ethereum address"),
   password: z.string().email("Invalid password"),
 });
+=======
+} from "../components/ui/form"
+import { Input } from "../components/ui/input"
+import formSchema  from "../schemas/formSchema"
+// const formSchema = z.object({
+//   username: z.string().min(2, {
+//     message: "Username must be at least 2 characters.",
+//   }),
+//   ethereum: z.string().email("Invalid ethereum address"),
+//   password: z.string().email("Invalid password"),
+// })
+>>>>>>> f7ad7d802d415245b3f94d72cd734cc2bb597598
 
 export function ActionForm() {
   // ...// 1. Define your form.
@@ -39,6 +52,7 @@ export function ActionForm() {
   }
 
   return (
+<<<<<<< HEAD
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -86,4 +100,69 @@ export function ActionForm() {
       </Form>
     </>
   );
+=======
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="ethereum"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Ethereum Address</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+  control={form.control}
+  name="dropdownField"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Choose an Option</FormLabel>
+        <FormControl>
+        <select {...field}>
+            <option value="">Select an option</option>
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+        </select>
+        </FormControl>
+        <FormMessage />
+        </FormItem>
+        )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+  )
+>>>>>>> f7ad7d802d415245b3f94d72cd734cc2bb597598
 }
