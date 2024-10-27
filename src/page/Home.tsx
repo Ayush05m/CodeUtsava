@@ -3,6 +3,7 @@ import Actions from "../components/actions";
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { CameraAccess } from "../components/cameraAccess";
 // import { useEffect, useState } from "react";
 // import { ActionForm } from "../components/Form";
 
@@ -26,6 +27,8 @@ export const Home = () => {
           </h1>
         )}
         <div className="form flex justify-center  ">{/* <ActionForm /> */}</div>
+
+        <CameraAccess/>
 
         {userAddress && (
           <>
