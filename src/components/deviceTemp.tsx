@@ -1,5 +1,4 @@
 import { LogAccess } from "../api/actions";
-import React from "react";
 
 export const DeviceTemp = (data: any) => {
   const username = localStorage.getItem("username");

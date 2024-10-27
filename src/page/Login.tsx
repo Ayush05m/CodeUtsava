@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { login } from "../api/userAuth";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [err, setErr] = useState("");
   const navigate = useNavigate();
 
   async function handleLogin() {

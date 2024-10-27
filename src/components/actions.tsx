@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 // import { Buttons } from "./Actionbtn";
 // import actions from "../../src/actions.json";
 import "./buttonstyle.css";
@@ -111,7 +111,7 @@ export const Actions = () => {
             className=""
             onClick={async () => {
               const response = await getLog();
-              // console.log(response);
+              console.log(response);
               setResponsedata((prev) => {
                 return { ...prev, getlog: response.data };
               });
