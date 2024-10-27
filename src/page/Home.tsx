@@ -11,6 +11,7 @@ export const Home = () => {
   return (
     <>
       <div className="Hero ">
+        <h1 className="text-3xl text-center">SMART SECURITY SYSTEM</h1>
         {!userAddress && (
           <h1 className="text-center">
             Connect to the Metamask and register yourself to use the Home
