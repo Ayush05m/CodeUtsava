@@ -3,7 +3,12 @@ import { DeviceTemp } from "./deviceTemp";
 
 export const Devices = () => {
   const [DeviceID, setDeviceID] = useState("");
-  const [devices, setDevices] = useState([]);
+  const [devices, setDevices] = useState([
+    "camera1",
+    "door1",
+    "light1",
+    "light2",
+  ]);
 
   function handleAddDeviceFrom() {
     const addUserform = document.querySelector(".addDeviceform");
@@ -13,10 +18,10 @@ export const Devices = () => {
 
   function handleSubmit() {
     setDeviceID((prev) => {
-      // return prev.push()
+      // prev.();
       console.log(prev);
-      // console.log(prev.);
-      return prev;
+      
+      return prev
     });
     console.log(devices);
     localStorage.setItem("devices", JSON.stringify(devices));

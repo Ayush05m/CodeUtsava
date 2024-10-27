@@ -2,12 +2,19 @@ import { Devices } from "../components/devices";
 import Actions from "../components/actions";
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 // import { useEffect, useState } from "react";
 // import { ActionForm } from "../components/Form";
 
 export const Home = () => {
   // const user: string = useSelector((state: RootState) => state.user);
-  const userAddress = localStorage.getItem("userAddress")
+  const [userAddress, setUserAddress] = useState(
+    localStorage.getItem("userAddress")
+  );
+  useEffect(() => {
+    setUserAddress(localStorage.getItem("userAddress"));
+  });
+
   return (
     <>
       <div className="Hero ">
@@ -20,12 +27,16 @@ export const Home = () => {
         )}
         <div className="form flex justify-center  ">{/* <ActionForm /> */}</div>
 
-        <div className="actions">
-          <Actions />
-        </div>
-        <div className="devices">
-          <Devices />
-        </div>
+        {userAddress && (
+          <>
+            <div className="actions">
+              <Actions />
+            </div>
+            <div className="devices">
+              <Devices />
+            </div>
+          </>
+        )}
       </div>
     </>
   );
