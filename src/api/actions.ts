@@ -3,7 +3,6 @@ import axios from "axios";
 // const API_BASE_URL = 'https://smarthome-sut5.onrender.com/api/logs/';
 const API_BASE_URL = "http://localhost:5001/api/logs/";
 
-
 export const AddUser = (userData: any) => {
   return axios.post(`${API_BASE_URL}/addUser`, userData);
 };
@@ -18,4 +17,12 @@ export const RemoveUserAccess = (userData: any) => {
 
 export const CheckUserAccess = (userData: any) => {
   return axios.post(`${API_BASE_URL}/checkUserAccess`, userData);
+};
+
+export const LogAccess = (userData: any) => {
+  return axios.post(`${API_BASE_URL}/logAccess`, userData);
+};
+
+export const getOwener = () => {
+  return axios.get(`${API_BASE_URL}/getOwner`);
 };

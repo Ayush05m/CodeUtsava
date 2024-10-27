@@ -1,3 +1,4 @@
+import { Devices } from "../components/devices";
 import Actions from "../components/actions";
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
@@ -5,11 +6,12 @@ import { useSelector } from "react-redux";
 // import { ActionForm } from "../components/Form";
 
 export const Home = () => {
-  const user: string = useSelector((state: RootState) => state.user);
+  // const user: string = useSelector((state: RootState) => state.user);
+  const userAddress = localStorage.getItem("userAddress")
   return (
     <>
       <div className="Hero ">
-        {!user && (
+        {!userAddress && (
           <h1 className="text-center">
             Connect to the Metamask and register yourself to use the Home
             Security System
@@ -19,6 +21,9 @@ export const Home = () => {
 
         <div className="actions">
           <Actions />
+        </div>
+        <div className="devices">
+          <Devices />
         </div>
       </div>
     </>

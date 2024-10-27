@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { signup } from "../api/userAuth";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
-  function onSubmit() {
-    // console.log(values);
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [Cpassword, setCPassword] = useState("");
+  const [err, setErr] = useState("");
+
+  async function handleSignup() {
+    if (password == Cpassword) {
+      const response = await signup({ username, password });
+      // console.log(response);
+      navigate("/login");
+    } else {
+      setErr("Passwords do not match");
+    }
   }
 
   return (
     <>
-      <form className="max-w-sm mx-auto">
+      <p className="text-red-400 text-center h-10 p-2">{err}</p>
+      <form
+        className="max-w-sm mx-auto"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSignup();
+        }}
+      >
         <div className="mb-5">
           <label
             htmlFor="email"
@@ -16,10 +37,13 @@ function SignUp() {
             Username
           </label>
           <input
-            type="email"
+            type=""
             id="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder=" "
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
             required
           />
         </div>
@@ -28,12 +52,15 @@ function SignUp() {
             htmlFor="password"
             className="block mb-2 text-sm font-medium text-gray-100 dark:text-white"
           >
-            Confirm password
+            Password
           </label>
           <input
             type="password"
             id="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             required
           />
         </div>
@@ -42,12 +69,15 @@ function SignUp() {
             htmlFor="password"
             className="block mb-2 text-sm font-medium text-gray-100 dark:text-white"
           >
-            Your password
+            Comfirm password
           </label>
           <input
             type="password"
             id="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            onChange={(e) => {
+              setCPassword(e.target.value);
+            }}
             required
           />
         </div>
@@ -61,6 +91,5 @@ function SignUp() {
     </>
   );
 }
-
 
 export default SignUp;

@@ -9,29 +9,35 @@ const Connect: React.FC = () => {
   const { sdk } = useSDK();
 
   const dispatch = useDispatch();
-  const [userAddress, setUserAddress] = useState<string | undefined>();
+  const [userAddress, setUserAddress] = useState("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+
+  setTimeout(() => {
+    setUserAddress(localStorage.getItem("userAddress") || "");
+  }, 600);
+  
 
   const connect = async () => {
     try {
       const accounts = await sdk?.connect();
-      setUserAddress(accounts?.[0]);
-      // console.log(userAddress);
+      console.log(accounts);
+      if (accounts) {
+        setUserAddress(accounts[0]);
+        // console.log(userAddress);
+        setTimeout(() => {
+          localStorage.setItem("userAddress", accounts[0]);
+        }, 200);
+        console.log(localStorage.getItem("userAddress"));
+      }
     } catch (err) {
       console.warn("failed to connect..", err);
     }
   };
 
-  useEffect(() => {
-    localStorage.setItem("userAddress", userAddress as string);
-  });
-
-  const logout = async () => {
+  const disconnect = async () => {
     try {
       await sdk?.terminate();
-      // console.log(userAddress);
-      console.log(localStorage.getItem("userAddress"));
-      setUserAddress(undefined);
+      localStorage.removeItem("userAddress")
     } catch (err) {
       console.warn("failed to disconnect..", err);
     }
@@ -43,32 +49,17 @@ const Connect: React.FC = () => {
       <div className="connect h-[100%]">
         {!userAddress && <button onClick={connect}>Connect</button>}
       </div>
-      <div className="logout flex flex-col items-end">
+      <div className="logout flex justify-center items-center gap-5">
         {userAddress ? (
           <>
-            <div className="profile">
-              <input
-                type="checkbox"
-                className="absolute profile-input"
-                style={{ width: "40px", height: "40px" }}
-              />
-              <img
-                src="/profile-icon.jpg"
-                className="profile-icon flex rounded-full cursor-pointer"
-                style={{ width: "40px", height: "40px" }}
-                alt=""
-              />
-              <div className="profile-expansion flex-col absolute right-4 bg-black">
-                <button onClick={logout}>Logout</button>
-                <span className="">
-                  {" "}
-                  Conneted with {userAddress.slice(0, 15) + "..."}
-                </span>
-              </div>
-            </div>
+            <p>Connected as: {userAddress}</p>
+            <button className="btn-31" onClick={disconnect}>
+              <span className="text-container">
+                <span className="loginTxt">Disconnect</span>
+              </span>
+            </button>
           </>
         ) : (
-          // <p>Connected as: {userAddress}</p>
           <>{errorMessage && <p className="error">{errorMessage}</p>}</>
         )}
       </div>

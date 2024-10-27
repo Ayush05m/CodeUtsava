@@ -136,3 +136,7 @@
         transform: translateY(0);
     }
 }
+
+.visible {
+    display: block;
+}

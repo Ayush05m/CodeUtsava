@@ -1,21 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSDK } from "@metamask/sdk-react";
 import { cn } from "../lib/utils";
 import { UseSelector, useDispatch } from "react-redux";
 import "../styles/navbar.css";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "../components/ui/navigation-menu";
 import Connect from "./connect";
+import { getOwener } from "../api/actions";
 
 export function Navbar() {
-  const handleLogin = () => {};
+  const [username, setUsername] = useState(localStorage.getItem("username"));
+  const [userAddress, setUserAddress] = useState(
+    localStorage.getItem("userAddress")
+  );
+  setTimeout(() => {
+    setUserAddress(localStorage.getItem("userAddress"));
+  }, 600);
+
+  let owner;
+  let isOwner;
+  const getOwner = async () => {
+    const response = await getOwener();
+    owner = response.data.owner;
+    isOwner = owner === userAddress;
+    console.log(isOwner);
+    // localStorage.setItem("isOwner", isOwner)
+  };
+
+  const { sdk } = useSDK();
+
+  const disconnect = async () => {
+    try {
+      await sdk?.terminate();
+      // console.log(userAddress);
+      console.log(localStorage.getItem("userAddress"));
+      localStorage.removeItem("userAddress");
+    } catch (err) {
+      console.warn("failed to disconnect..", err);
+    }
+  };
+
+  useEffect(() => {
+    if (userAddress === "undefined") {
+      setUserAddress(null);
+    }
+    if (username && userAddress) {
+      getOwner();
+    }
+    setUsername(localStorage.getItem("username"));
+    setUserAddress(localStorage.getItem("userAddress"));
+  }, [username, userAddress, localStorage]);
+
   return (
     <>
       <div className="flex border border-gray-600 justify-between px-5 py-2">
@@ -48,27 +88,51 @@ export function Navbar() {
           </NavigationMenu>
         </div>
         <div className="nav-end flex gap-5">
-          {/* <Connect /> */}
-          <div className="Login">
-            {/* <input type="checkbox" name="" id="" /> */}
-            <a href="/login" className="loginLabel">
-              <button className="btn-31" onClick={handleLogin}>
-                <span className="text-container">
-                  <span className="loginTxt">Login</span>
-                </span>
-              </button>
-            </a>
-          </div>
-          <div className="SignUp">
-            {/* <input type="checkbox" name="" id="" /> */}
-            <a href="/signup" className="loginLabel">
-              <button className="btn-31" onClick={handleLogin}>
-                <span className="text-container">
-                  <span className="loginTxt">Sign Up</span>
-                </span>
-              </button>
-            </a>
-          </div>
+          {username && (
+            <>
+              <Connect />
+              <div
+                className="Logout"
+                onClick={() => {
+                  localStorage.clear();
+                  disconnect();
+                }}
+              >
+                {/* <input type="checkbox" name="" id="" /> */}
+                <a href="/">
+                  <button className="btn-31">
+                    <span className="text-container">
+                      <span className="loginTxt">Logout</span>
+                    </span>
+                  </button>
+                </a>
+              </div>
+            </>
+          )}
+          {!username && (
+            <>
+              <div className="Login">
+                {/* <input type="checkbox" name="" id="" /> */}
+                <a href="/login" className="loginLabel">
+                  <button className="btn-31">
+                    <span className="text-container">
+                      <span className="loginTxt">Login</span>
+                    </span>
+                  </button>
+                </a>
+              </div>
+              <div className="SignUp">
+                {/* <input type="checkbox" name="" id="" /> */}
+                <a href="/signup" className="loginLabel">
+                  <button className="btn-31">
+                    <span className="text-container">
+                      <span className="loginTxt">Sign Up</span>
+                    </span>
+                  </button>
+                </a>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>
