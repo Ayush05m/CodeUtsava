@@ -14,7 +14,7 @@ function Login() {
     localStorage.setItem("username", response.data.username);
     setTimeout(() => {
       navigate("/");
-    }, 500);
+    }, 1000);
   }
 
   return (

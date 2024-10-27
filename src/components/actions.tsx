@@ -21,9 +21,10 @@ export const Actions = () => {
 
   const [newUsername, setnewUsername] = useState<string | undefined | null>();
   const [newAddress, setnewAddress] = useState<string | undefined | null>();
-  const [updatenewAddress, setupdatenewAddress] = useState<
-    string | undefined | null
-  >();
+  const [updatenewAddress, setupdatenewAddress] = useState<string | undefined | null>();
+  
+  const [removeUsername, setremoveUsername] = useState<string | undefined | null>();
+  const [removenewAddress, setremoveAddress] = useState<string | undefined | null>();
   const [Responsedata, setResponsedata] = useState({ api: "response" });
   const [getLogs, setGetlogs] = useState();
 
@@ -43,6 +44,13 @@ export const Actions = () => {
     });
     console.log(response);
   }
+  async function handleRemoveUserSubmit() {
+    const response = await RemoveUserAccess({
+      username: newUsername,
+      presentUser: updatenewAddress,
+    });
+    console.log(response);
+  }
 
   function handleAddUserFrom() {
     const addUserform = document.querySelector(".adduserform");
@@ -51,6 +59,11 @@ export const Actions = () => {
   }
   function handleUpdateUserFrom() {
     const addUserform = document.querySelector(".updateuserform");
+    console.log(addUserform);
+    addUserform?.classList.toggle("visible");
+  }
+  function handleRemoveUserFrom() {
+    const addUserform = document.querySelector(".removeuserform");
     console.log(addUserform);
     addUserform?.classList.toggle("visible");
   }
@@ -120,16 +133,60 @@ export const Actions = () => {
         <div className="actionbtn p-2">
           <button
             className=""
-            onClick={async () => {
-              const response = await RemoveUserAccess({
-                username: username,
-                presentUser: userAddress,
-              });
-              // console.log(response);
-            }}
+            onClick={handleRemoveUserFrom}
           >
             <p className="">Remove User</p>
           </button>
+          <form
+            className="max-w-sm mx-auto removeuserform absolute top-[10%] right-[65%] p-6 bg-white hidden"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleRemoveUserSubmit();
+            }}
+          >
+            <div className="mb-5">
+              <label
+                htmlFor="username"
+                className="block mb-2 text-sm font-medium text-black dark:text-black"
+              >
+                Username
+              </label>
+              <input
+                type=""
+                id="username"
+                className="bg-gray-800 border text-gray-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=" "
+                required
+                onChange={(e) => {
+                  setremoveUsername(e.target.value);
+                }}
+              />
+            </div>
+            <div className="mb-5">
+              <label
+                htmlFor="username"
+                className="block mb-2 text-sm font-medium text-black dark:text-black"
+              >
+                Etherium Address
+              </label>
+              <input
+                type=""
+                id="username"
+                className="bg-gray-800 border text-gray-50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=" "
+                required
+                onChange={(e) => {
+                  setremoveAddress(e.target.value);
+                }}
+              />
+            </div>
+            <button
+              type="submit"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Remove
+            </button>
+          </form>
         </div>
         <div className="actionbtn p-2">
           <button
